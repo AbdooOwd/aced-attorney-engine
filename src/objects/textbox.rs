@@ -1,5 +1,5 @@
 use macroquad::prelude::*;
-use crate::types::*;
+use crate::{config::{PRIMARY_COLOR, SECONDARY_COLOR}, types::*};
 
 const FONT_SIZE: f32 = 36.0;
 const PADDING_FONT_RELATIVE_VALUE: f32 = 0.4;
@@ -12,8 +12,8 @@ const PADDING: Vec2 = Vec2 {
  * Handles drawing the textbox's background + text, including positioning
  */
 pub fn draw_textbox(text: &str, x: f32, y: f32) {
-    draw_rectangle(x, y, screen_width() * 0.99, screen_height() * 0.2, BLACK);
-    draw_text(text, x + PADDING.x, y + FONT_SIZE / 2.0 + PADDING.y, FONT_SIZE, WHITE);
+    draw_rectangle(x, y, screen_width() * 0.99, screen_height() * 0.2, SECONDARY_COLOR);
+    draw_text(text, x + PADDING.x, y + FONT_SIZE / 2.0 + PADDING.y, FONT_SIZE, PRIMARY_COLOR);
 }
 
 /**

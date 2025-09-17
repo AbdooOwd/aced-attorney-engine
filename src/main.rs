@@ -1,13 +1,16 @@
+pub mod config;
+pub mod types;
 pub mod helpers;
 pub mod objects;
 pub mod gameloop;
-pub mod types;
 
 use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
 use helpers::*;
 use types::*;
+use config::*;
 use gameloop::*;
 use objects::textbox::*;
+
 
 const _STORY_DATA_PATH: &str = "assets/data/data.json"; // should I really use a json?
 
@@ -28,7 +31,7 @@ async fn main() {
     play_sound(&bgm, PlaySoundParams { looped: true, volume: 1.0 });
 
     loop { 
-        clear_background(WHITE);
+        clear_background(PRIMARY_COLOR);
 
         // initialize a texture
         let speaker_texture = get_texture("assets/pob/normal.png").await;
