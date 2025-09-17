@@ -7,6 +7,7 @@ use macroquad::prelude::*;
 use helpers::*;
 use types::*;
 use gameloop::*;
+use objects::textbox::*;
 
 
 #[macroquad::main("Aced Attorney Engine")]
