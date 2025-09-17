@@ -9,7 +9,7 @@ const SPEAKER_TEXTURE_SCALER: f32 = 4.0;
  * TODO: use u8 instead of usize
  */
 pub fn textbox_loop(text_id: &mut usize, textbox_data: &TextboxData) {
-    if textbox_data.can_accept_text_id(*text_id) {
+    if !textbox_data.can_accept_text_id(*text_id) {
         // reached end of text data
         println!("Reached end of textbox data!");
         return;
