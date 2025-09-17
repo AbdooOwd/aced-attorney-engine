@@ -3,12 +3,13 @@ pub mod objects;
 pub mod gameloop;
 pub mod types;
 
-use macroquad::prelude::*;
+use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
 use helpers::*;
 use types::*;
 use gameloop::*;
 use objects::textbox::*;
 
+const _STORY_DATA_PATH: &str = "assets/data/data.json"; // should I really use a json?
 
 #[macroquad::main("Aced Attorney Engine")]
 async fn main() {
@@ -16,13 +17,15 @@ async fn main() {
     
     let textbox_data = TextboxData {
         data: vec![
-            TextboxDataEntry { text: "Your honor,".to_string(), speaker_emotion: SpeakerEmotion::Normal },
-            TextboxDataEntry { text: "cry about it.".to_string(), speaker_emotion: SpeakerEmotion::Objection }
+            TextboxDataEntry { text: "Your honor,".to_string(), speaker_emotion: SpeakerEmotion::Normal, speaker_type: SpeakerType::Defence },
+            TextboxDataEntry { text: "cry about it.".to_string(), speaker_emotion: SpeakerEmotion::Objection, speaker_type: SpeakerType::Defence },
+            TextboxDataEntry { text: "As a matter of fact...".to_string(), speaker_emotion: SpeakerEmotion::Thinking, speaker_type: SpeakerType::Defence },
+            TextboxDataEntry { text: "Nobody cares.".to_string(), speaker_emotion: SpeakerEmotion::Exclamation, speaker_type: SpeakerType::Defence },
         ]
     };
 
-    // let bgm = load_sound("assets/objection_2002.ogg").await.unwrap();
-    // play_sound(&bgm, PlaySoundParams { looped: true, volume: 1.0 });
+    let bgm = load_sound("assets/objection_2002.ogg").await.unwrap();
+    play_sound(&bgm, PlaySoundParams { looped: true, volume: 1.0 });
 
     loop { 
         clear_background(WHITE);
@@ -39,7 +42,8 @@ async fn main() {
             when done with previous.
             */
             println!("Out of textbox data entries. breaking out of game loop");
-            break;
+            text_id = 0;
+            // break;
         }
 
         next_frame().await
