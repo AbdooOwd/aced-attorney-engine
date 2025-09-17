@@ -9,13 +9,25 @@ pub enum SpeakerEmotion {
     Objection
 }
 
+// TODO: could also be called ViewType, or CamView, or idk
+#[derive(Clone, Copy)]
+pub enum SpeakerType {
+    Defence,
+    DefenceAssistant,
+    Prosecution,
+    Judge,
+    Witness,
+}
+
+
 /**
  * TODO: Migrate this to `objects/textbox`
  */
 #[derive(Clone)]
 pub struct TextboxDataEntry {
     pub text: String,
-    pub speaker_emotion: SpeakerEmotion
+    pub speaker_emotion: SpeakerEmotion,
+    pub speaker_type: SpeakerType
 }
 
 pub struct TextboxData {
