@@ -3,6 +3,7 @@ pub mod types;
 pub mod helpers;
 pub mod objects;
 pub mod gameloop;
+pub mod global_keybinds;
 
 use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
 use helpers::*;
@@ -48,6 +49,8 @@ async fn main() {
             text_id = 0;
             // break;
         }
+
+        global_keybinds::handle_global_keybinds();
 
         next_frame().await
     }
