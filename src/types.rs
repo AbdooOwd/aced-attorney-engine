@@ -1,6 +1,7 @@
 use macroquad::prelude::error;
+use serde::Deserialize;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Deserialize)]
 pub enum SpeakerEmotion {
     NaN, // used for error handling or null values or anything else
     Normal,
@@ -10,7 +11,7 @@ pub enum SpeakerEmotion {
 }
 
 // TODO: could also be called ViewType, or CamView, or idk
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Deserialize)]
 pub enum SpeakerType {
     NaN,
     Defence,
@@ -24,14 +25,14 @@ pub enum SpeakerType {
 /**
  * TODO: Migrate this to `objects/textbox`
  */
-#[derive(Clone)]
+#[derive(Clone, Deserialize)]
 pub struct TextboxDataEntry {
     pub text: String,
     pub speaker_emotion: SpeakerEmotion,
     pub speaker_type: SpeakerType
 }
 
-#[derive(Clone)]
+#[derive(Clone, Deserialize)]
 pub struct TextboxData {
     pub data: Vec<TextboxDataEntry>
 }

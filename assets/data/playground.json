@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "text":
+            "Your honor,",
+            "speaker_emotion": "Normal",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "there isn't anything weird about that.",
+            "speaker_emotion": "Normal",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "Only the behavior!",
+            "speaker_emotion": "Objection",
+            "speaker_type": "Defence"
+        }
+    ]
+}
