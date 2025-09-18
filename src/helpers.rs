@@ -1,5 +1,5 @@
 use macroquad::prelude::*;
-use crate::{assets::get_texture, types::*};
+use crate::{assets::fs::get_texture, types::*};
 
 pub fn draw_from_texture(texture: &Texture2D, x: f32, y: f32, scaler: f32) {
     draw_texture_ex(&texture, x, y, WHITE,

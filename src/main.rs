@@ -9,13 +9,15 @@ pub mod importers;
 pub mod assets;
 
 
-use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
+use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound}};
 use types::*;
 use config::*;
 use gameloop::*;
 use objects::textbox::*;
 use importers::data_importer::import_data;
-use assets::*;
+use assets::fs::*;
+
+use crate::assets::GameAssets;
 
 
 const _STORY_DATA_PATH: &str = "assets/data/data.json"; // should I really use a json?
@@ -23,21 +25,17 @@ const _STORY_DATA_PATH: &str = "assets/data/data.json"; // should I really use a
 #[macroquad::main("Aced Attorney Engine")]
 async fn main() {
     let mut text_id: usize = 0;
-    
     let textbox_data: TextboxData = import_data(get_data("playground.json").as_str());
 
-    // pixel not blurry!
-    set_default_filter_mode(FilterMode::Nearest);
-
-    let bgm = load_sound("assets/objection_2002.ogg").await.unwrap();
-    play_sound(&bgm, PlaySoundParams { looped: true, volume: 0.7 });
+    let game_assets: GameAssets = GameAssets::initialize().await;
+    
+    play_sound(&game_assets.bgm, PlaySoundParams { looped: true, volume: 0.7 });
 
     loop { 
         clear_background(PRIMARY_COLOR);
 
         // initialize a texture
-        let speaker_texture = get_texture("pob/normal.png").await;
-        update_speaker_emotion_texture(textbox_data.get_entry(text_id).speaker_emotion, &speaker_texture).await;
+        update_speaker_emotion_texture(textbox_data.get_entry(text_id).speaker_emotion, &game_assets.speaker_tex).await;
         textbox_loop(&mut text_id, &textbox_data);
 
         if text_id + 1 > textbox_data.get_entries_count() {

@@ -2,7 +2,7 @@ use macroquad::prelude::*;
 use crate::{
     helpers::{draw_from_texture, get_emotion_texture_path}, 
     types::*,
-    assets::get_image
+    assets::fs::get_image
 };
 
 // TODO: should this "speaker" stuff be moved to its separate file in "objects/"?
