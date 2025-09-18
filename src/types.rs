@@ -12,6 +12,7 @@ pub enum SpeakerEmotion {
 // TODO: could also be called ViewType, or CamView, or idk
 #[derive(Clone, Copy)]
 pub enum SpeakerType {
+    NaN,
     Defence,
     DefenceAssistant,
     Prosecution,
@@ -32,7 +33,7 @@ pub struct TextboxDataEntry {
 
 #[derive(Clone)]
 pub struct TextboxData {
-    pub data: Vec<TextboxDataEntry>,
+    pub data: Vec<TextboxDataEntry>
 }
 
 impl TextboxData {
@@ -49,7 +50,11 @@ impl TextboxData {
             &self.data[textbox_id]
         } else {
             println!("Error! Couldn't find textbox data for id {}", textbox_id);
-            &self.data[self.get_entries_count() - 1] // get last entry
+            if self.get_entries_count() > 0 {
+                return &self.data[self.get_entries_count() - 1]; // get last entry
+            }
+
+            panic!("TextboxData is empty! (len = 0)");
         }
     }
 
@@ -59,7 +64,7 @@ impl TextboxData {
 
     pub fn get_emotion(&self, textbox_id: usize) -> SpeakerEmotion {
         if self.can_accept_text_id(textbox_id) {
-            self.data[textbox_id].speaker_emotion
+            self.get_entry(textbox_id).speaker_emotion
         } else {
             SpeakerEmotion::NaN
         }
