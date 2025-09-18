@@ -1,3 +1,10 @@
+[workspace]
+resolver = "2"
+members = [
+    ".",
+    "tools/textbox-editor"
+]
+
 [package]
 name = "aced-attorney-engine"
 version = "0.1.0"
