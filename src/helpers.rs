@@ -3,13 +3,13 @@ use crate::{assets::fs::get_texture, types::*};
 
 pub fn draw_from_texture(texture: &Texture2D, x: f32, y: f32, scaler: f32) {
     draw_texture_ex(&texture, x, y, WHITE,
-        DrawTextureParams { 
-            dest_size: Some(Vec2 {x: texture.width() * scaler, y: texture.height() * scaler}), 
-            source: None, 
-            rotation: 0.0, 
-            flip_x: false, 
-            flip_y: false, 
-            pivot: None 
+        DrawTextureParams {
+            dest_size: Some(Vec2 {x: texture.width() * scaler, y: texture.height() * scaler}),
+            source: None,
+            rotation: 0.0,
+            flip_x: false,
+            flip_y: false,
+            pivot: None
         }
     );
 }
@@ -24,7 +24,7 @@ pub async fn draw_texture_from_path(path: &str, x: f32, y: f32, scaler: f32) {
 
 /**
  * TODO: what the heck is `<&'static str>`?
- * TODO: for now, pob is hardcoded as the only speaker texture 
+ * TODO: for now, pob is hardcoded as the only speaker texture
 */
  pub fn get_emotion_texture_path(emotion: SpeakerEmotion) -> String {
     let emotion_texture_filename = match emotion {

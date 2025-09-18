@@ -9,7 +9,7 @@ pub mod importers;
 pub mod assets;
 
 
-use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound}, experimental::collections::storage};
+use macroquad::{audio::{play_sound, PlaySoundParams}, experimental::collections::storage, prelude::*};
 use types::*;
 use config::*;
 use gameloop::*;
@@ -27,13 +27,12 @@ async fn main() {
     let mut text_id: usize = 0;
     let textbox_data: TextboxData = import_data(get_data(STORY_DATA_PATH).as_str());
 
-    let game_assets: GameAssets = GameAssets::initialize().await;
-    storage::store(game_assets);
+    storage::store(GameAssets::load().await);
     let game_assets= storage::get::<GameAssets>();
     
     play_sound(&game_assets.bgm, PlaySoundParams { looped: true, volume: 0.7 });
 
-    loop { 
+    loop {
         clear_background(PRIMARY_COLOR);
 
         // initialize a texture

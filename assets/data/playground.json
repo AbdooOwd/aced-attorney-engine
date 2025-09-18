@@ -2,37 +2,55 @@
     "data": [
         {
             "text":
+            "Your honor, the defence would like to request a cross-examination.",
+            "speaker_emotion": "Normal",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "Witness, what were you doing last-night, the night of the murder?",
+            "speaker_emotion": "Normal",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "...",
+            "speaker_emotion": "Normal",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "shout:hold_it",
+            "speaker_emotion": "Objection",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "Wintess! Things don't add up!",
+            "speaker_emotion": "Objection",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "The facts and your words, that is.",
+            "speaker_emotion": "Thinking",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "...",
+            "speaker_emotion": "Exclamation",
+            "speaker_type": "Defence"
+        },
+        {
+            "text":
             "shout:objection",
             "speaker_emotion": "Objection",
             "speaker_type": "Defence"
         },
         {
             "text":
-            "Your honor,",
-            "speaker_emotion": "Normal",
-            "speaker_type": "Defence"
-        },
-        {
-            "text":
-            "there isn't anything weird about that.",
-            "speaker_emotion": "Normal",
-            "speaker_type": "Defence"
-        },
-        {
-            "text":
-            "Only the behavior!",
-            "speaker_emotion": "Objection",
-            "speaker_type": "Defence"
-        },
-        {
-            "text":
-            "But leaving evidence aside...",
-            "speaker_emotion": "Thinking",
-            "speaker_type": "Defence"
-        },
-        {
-            "text":
-            "No one could orchestrate such actions!",
+            "Actually, you just solved the case!",
             "speaker_emotion": "Objection",
             "speaker_type": "Defence"
         }

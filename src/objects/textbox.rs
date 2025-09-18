@@ -1,9 +1,8 @@
 use macroquad::{prelude::*, experimental::collections::storage};
 use crate::{
     assets::GameAssets, 
-    config::{PRIMARY_COLOR, SECONDARY_COLOR, SHOUT_TEX_SCALE}, 
-    helpers::draw_from_texture, 
-    objects::shout::{update_shout_tex, get_shout_type_from_str}, 
+    config::{PRIMARY_COLOR, SECONDARY_COLOR}, 
+    objects::shout::{do_shout, get_shout_type_from_str, HAS_SHOUTED}, 
     types::*
 };
 
@@ -34,19 +33,14 @@ pub async fn textbox_loop(text_id: &mut usize, textbox_data: &TextboxData) {
         return;
     }
 
-    let game_assets = storage::get::<GameAssets>();
+    let _game_assets = storage::get::<GameAssets>();
     let current_textbox_data: &TextboxDataEntry = textbox_data.get_entry(*text_id);
     let current_text: &String = &current_textbox_data.text;
 
     if current_text.starts_with("shout:") {
         let shout_type_str = current_text.split(':').last().unwrap();
         let shout_type: ShoutType = get_shout_type_from_str(shout_type_str.to_string());
-        update_shout_tex(shout_type).await;
-        let shout_tex = &game_assets.shouting_tex;
-        draw_from_texture(shout_tex, 
-            0.5 * (screen_width() - shout_tex.width() * SHOUT_TEX_SCALE),
-            0.5 * (screen_height() - shout_tex.height() * SHOUT_TEX_SCALE),
-        SHOUT_TEX_SCALE);
+        do_shout(shout_type).await;
     } else {
         draw_textbox(&current_textbox_data.text, screen_width() * 0.005, screen_height() * 0.79);
     }
@@ -54,8 +48,10 @@ pub async fn textbox_loop(text_id: &mut usize, textbox_data: &TextboxData) {
     // handle input
     if is_key_pressed(KeyCode::Space) {
         *text_id += 1;
+        unsafe { HAS_SHOUTED = false; }
     }
     if is_key_pressed(KeyCode::Left) && *text_id > 0 {
         *text_id -= 1;
+        unsafe { HAS_SHOUTED = false; }
     }
 }

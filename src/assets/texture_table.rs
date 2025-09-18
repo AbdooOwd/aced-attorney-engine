@@ -1,0 +1,1 @@
+pub const TEX_POB_NORMAL: &str = "pob/normal.png";
