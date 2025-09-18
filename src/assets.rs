@@ -1,6 +1,6 @@
-use macroquad::prelude::{Texture2D, load_texture, FilterMode, Image, load_image};
+use macroquad::prelude::{Texture2D, load_texture, Image, load_image};
 
-const ASSETS_DIR: &str = "assets";
+const _ASSETS_DIR: &str = "assets";
 const DATA_DIR: &str = "assets/data";
 const TEXTURES_DIR: &str = "assets/textures";
 
