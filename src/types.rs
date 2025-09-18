@@ -21,6 +21,13 @@ pub enum SpeakerType {
     Witness,
 }
 
+#[derive(Clone, Copy, Deserialize, Debug)]
+pub enum ShoutType {
+    NaN,
+    Objection,
+    HoldIt,
+}
+
 
 /**
  * TODO: Migrate this to `objects/textbox`

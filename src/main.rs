@@ -9,7 +9,7 @@ pub mod importers;
 pub mod assets;
 
 
-use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound}};
+use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound}, experimental::collections::storage};
 use types::*;
 use config::*;
 use gameloop::*;
@@ -20,14 +20,16 @@ use assets::fs::*;
 use crate::assets::GameAssets;
 
 
-const _STORY_DATA_PATH: &str = "assets/data/data.json"; // should I really use a json?
+const STORY_DATA_PATH: &str = "playground.json"; // should I really use a json?
 
 #[macroquad::main("Aced Attorney Engine")]
 async fn main() {
     let mut text_id: usize = 0;
-    let textbox_data: TextboxData = import_data(get_data("playground.json").as_str());
+    let textbox_data: TextboxData = import_data(get_data(STORY_DATA_PATH).as_str());
 
     let game_assets: GameAssets = GameAssets::initialize().await;
+    storage::store(game_assets);
+    let game_assets= storage::get::<GameAssets>();
     
     play_sound(&game_assets.bgm, PlaySoundParams { looped: true, volume: 0.7 });
 
@@ -36,7 +38,7 @@ async fn main() {
 
         // initialize a texture
         update_speaker_emotion_texture(textbox_data.get_entry(text_id).speaker_emotion, &game_assets.speaker_tex).await;
-        textbox_loop(&mut text_id, &textbox_data);
+        textbox_loop(&mut text_id, &textbox_data).await;
 
         if text_id + 1 > textbox_data.get_entries_count() {
             /* TODO

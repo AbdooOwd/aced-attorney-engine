@@ -1,5 +1,11 @@
-use macroquad::prelude::*;
-use crate::{config::{PRIMARY_COLOR, SECONDARY_COLOR}, types::*};
+use macroquad::{prelude::*, experimental::collections::storage};
+use crate::{
+    assets::GameAssets, 
+    config::{PRIMARY_COLOR, SECONDARY_COLOR, SHOUT_TEX_SCALE}, 
+    helpers::draw_from_texture, 
+    objects::shout::{update_shout_tex, get_shout_type_from_str}, 
+    types::*
+};
 
 const FONT_SIZE: f32 = 36.0;
 const PADDING_FONT_RELATIVE_VALUE: f32 = 0.4;
@@ -21,16 +27,29 @@ pub fn draw_textbox(text: &str, x: f32, y: f32) {
  * Also handles input for textbox advancing.
  * TODO: use u8 instead of usize
  */
-pub fn textbox_loop(text_id: &mut usize, textbox_data: &TextboxData) {
+pub async fn textbox_loop(text_id: &mut usize, textbox_data: &TextboxData) {
     if !textbox_data.can_accept_text_id(*text_id) {
         // reached end of text data
         println!("Reached end of textbox data!");
         return;
     }
 
+    let game_assets = storage::get::<GameAssets>();
     let current_textbox_data: &TextboxDataEntry = textbox_data.get_entry(*text_id);
+    let current_text: &String = &current_textbox_data.text;
 
-    draw_textbox(&current_textbox_data.text, screen_width() * 0.005, screen_height() * 0.79);
+    if current_text.starts_with("shout:") {
+        let shout_type_str = current_text.split(':').last().unwrap();
+        let shout_type: ShoutType = get_shout_type_from_str(shout_type_str.to_string());
+        update_shout_tex(shout_type).await;
+        let shout_tex = &game_assets.shouting_tex;
+        draw_from_texture(shout_tex, 
+            0.5 * (screen_width() - shout_tex.width() * SHOUT_TEX_SCALE),
+            0.5 * (screen_height() - shout_tex.height() * SHOUT_TEX_SCALE),
+        SHOUT_TEX_SCALE);
+    } else {
+        draw_textbox(&current_textbox_data.text, screen_width() * 0.005, screen_height() * 0.79);
+    }
 
     // handle input
     if is_key_pressed(KeyCode::Space) {
