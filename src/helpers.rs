@@ -23,13 +23,6 @@ pub async fn draw_texture_from_path(path: &str, x: f32, y: f32, scaler: f32) {
     draw_from_texture(&tex, x, y, scaler);
 }
 
-pub async fn get_texture(path: &str) -> Texture2D {
-    let tex = load_texture(path).await.unwrap();
-    tex.set_filter(FilterMode::Nearest);
-    
-    tex
-}
-
 /**
  * TODO: what the heck is `<&'static str>`?
  * TODO: for now, pob is hardcoded as the only speaker texture 
@@ -43,5 +36,5 @@ pub async fn get_texture(path: &str) -> Texture2D {
         SpeakerEmotion::Objection => "objection",
     };
 
-    format!("assets/pob/{}.png", emotion_texture_filename)
+    format!("pob/{}.png", emotion_texture_filename)
 }
