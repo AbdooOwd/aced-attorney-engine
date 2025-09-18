@@ -6,7 +6,6 @@ const TEXTURES_DIR: &str = "assets/textures";
 
 pub async fn get_texture(path: &str) -> Texture2D {
     let tex = load_texture(format!("{}/{}", TEXTURES_DIR, path).as_str()).await.unwrap();
-    tex.set_filter(FilterMode::Nearest);
     
     tex
 }

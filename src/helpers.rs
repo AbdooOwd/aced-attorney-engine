@@ -1,5 +1,5 @@
 use macroquad::prelude::*;
-use crate::types::*;
+use crate::{assets::get_texture, types::*};
 
 pub fn draw_from_texture(texture: &Texture2D, x: f32, y: f32, scaler: f32) {
     draw_texture_ex(&texture, x, y, WHITE,
@@ -18,8 +18,7 @@ pub fn draw_from_texture(texture: &Texture2D, x: f32, y: f32, scaler: f32) {
  * Draws a texture from `path`, and mutliplies its scale by `scaler`
  */
 pub async fn draw_texture_from_path(path: &str, x: f32, y: f32, scaler: f32) {
-    let tex = load_texture(path).await.unwrap();
-    tex.set_filter(FilterMode::Nearest);
+    let tex = get_texture(path).await;
     draw_from_texture(&tex, x, y, scaler);
 }
 

@@ -10,7 +10,6 @@ pub mod assets;
 
 
 use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
-use helpers::*;
 use types::*;
 use config::*;
 use gameloop::*;
@@ -26,6 +25,9 @@ async fn main() {
     let mut text_id: usize = 0;
     
     let textbox_data: TextboxData = import_data(get_data("playground.json").as_str());
+
+    // pixel not blurry!
+    set_default_filter_mode(FilterMode::Nearest);
 
     let bgm = load_sound("assets/objection_2002.ogg").await.unwrap();
     play_sound(&bgm, PlaySoundParams { looped: true, volume: 0.7 });
