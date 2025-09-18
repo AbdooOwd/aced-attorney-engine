@@ -4,6 +4,7 @@ pub mod helpers;
 pub mod objects;
 pub mod gameloop;
 pub mod global_keybinds;
+pub mod debug;
 
 use macroquad::{prelude::*, audio::{PlaySoundParams, play_sound, load_sound}};
 use helpers::*;

@@ -30,6 +30,7 @@ pub struct TextboxDataEntry {
     pub speaker_type: SpeakerType
 }
 
+#[derive(Clone)]
 pub struct TextboxData {
     pub data: Vec<TextboxDataEntry>,
 }
