@@ -53,6 +53,12 @@
             "Actually, you just solved the case!",
             "speaker_emotion": "Objection",
             "speaker_type": "Defence"
+        },
+        {
+            "text":
+            "As it has been stated here...",
+            "speaker_emotion": "Reading",
+            "speaker_type": "Defence"
         }
     ]
 }

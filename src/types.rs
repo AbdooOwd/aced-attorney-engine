@@ -7,7 +7,8 @@ pub enum SpeakerEmotion {
     Normal,
     Exclamation,
     Thinking,
-    Objection
+    Objection,
+    Reading
 }
 
 // TODO: could also be called ViewType, or CamView, or idk

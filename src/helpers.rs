@@ -33,6 +33,7 @@ pub async fn draw_texture_from_path(path: &str, x: f32, y: f32, scaler: f32) {
         SpeakerEmotion::Exclamation => "huh",
         SpeakerEmotion::Thinking => "hmm",
         SpeakerEmotion::Objection => "objection",
+        SpeakerEmotion::Reading => "read"
     };
 
     format!("pob/{}.png", emotion_texture_filename)
