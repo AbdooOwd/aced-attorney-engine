@@ -8,8 +8,7 @@ pub mod debug;
 pub mod importers;
 pub mod assets;
 
-
-use macroquad::{audio::{play_sound, PlaySoundParams}, experimental::collections::storage, prelude::*};
+use macroquad::{audio::{play_sound, PlaySoundParams}, experimental::collections::storage, miniquad::conf::Icon, prelude::*};
 use types::*;
 use config::*;
 use gameloop::*;
@@ -22,8 +21,17 @@ use crate::assets::GameAssets;
 
 const STORY_DATA_PATH: &str = "playground.json"; // should I really use a json?
 
-#[macroquad::main("Aced Attorney Engine")]
+fn window_conf() -> Conf {
+    Conf { 
+        window_title: "Aced Attorney Engine".to_owned(),
+        icon: Some(Icon::miniquad_logo()),
+        ..Default::default()
+    }
+}
+
+#[macroquad::main(window_conf)]
 async fn main() {
+    
     let mut text_id: usize = 0;
     let textbox_data: TextboxData = import_data(get_data(STORY_DATA_PATH).as_str());
 

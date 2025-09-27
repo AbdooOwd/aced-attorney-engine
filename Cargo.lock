@@ -437,6 +437,7 @@ name = "textbox-editor"
 version = "0.1.0"
 dependencies = [
  "aced-attorney-engine",
+ "macroquad",
 ]
 
 [[package]]
