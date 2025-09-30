@@ -8,7 +8,7 @@ pub mod debug;
 pub mod importers;
 pub mod assets;
 
-use macroquad::{audio::{play_sound, PlaySoundParams}, experimental::collections::storage, miniquad::conf::Icon, prelude::*};
+use macroquad::{audio::{play_sound, PlaySoundParams}, experimental::collections::storage, prelude::*};
 use types::*;
 use config::*;
 use gameloop::*;
@@ -16,15 +16,17 @@ use objects::textbox::*;
 use importers::data_importer::import_data;
 use assets::fs::*;
 
-use crate::assets::GameAssets;
+use crate::{assets::GameAssets, helpers::get_Icon};
 
 
 const STORY_DATA_PATH: &str = "playground.json"; // should I really use a json?
 
 fn window_conf() -> Conf {
+    let icon = get_Icon();
+
     Conf { 
         window_title: "Aced Attorney Engine".to_owned(),
-        icon: Some(Icon::miniquad_logo()),
+        icon: Some(icon),
         ..Default::default()
     }
 }
